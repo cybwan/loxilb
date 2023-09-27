@@ -23,10 +23,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/loxilb-io/loxilb/api/loxinlp"
-	cmn "github.com/loxilb-io/loxilb/common"
-	tk "github.com/loxilb-io/loxilib"
-	probing "github.com/prometheus-community/pro-bing"
 	"io/ioutil"
 	"net"
 	"reflect"
@@ -34,6 +30,12 @@ import (
 	"strconv"
 	"sync"
 	"time"
+
+	tk "github.com/loxilb-io/loxilib"
+	probing "github.com/prometheus-community/pro-bing"
+
+	"github.com/loxilb-io/loxilb/api/loxinlp"
+	cmn "github.com/loxilb-io/loxilb/common"
 )
 
 // error codes
@@ -1049,10 +1051,10 @@ func (R *RuleH) AddNatLbRule(serv cmn.LbServiceArg, servSecIPs []cmn.LbSecIPArg,
 	for _, k := range servSecIPs {
 		pNetAddr := net.ParseIP(k.SecIP)
 		if pNetAddr == nil {
-			return RuleUnknownServiceErr, errors.New("malformed-secIP error")
+			return RuleUnknownServiceErr, errors.New("malformed-SecIP error")
 		}
 		if tk.IsNetIPv4(serv.ServIP) && tk.IsNetIPv6(k.SecIP) {
-			return RuleUnknownServiceErr, errors.New("malformed-secIP nat46 error")
+			return RuleUnknownServiceErr, errors.New("malformed-SecIP nat46 error")
 		}
 		sip := ruleNatSIP{pNetAddr}
 		nSecIP = append(nSecIP, sip)
@@ -1105,7 +1107,7 @@ func (R *RuleH) AddNatLbRule(serv cmn.LbServiceArg, servSecIPs []cmn.LbSecIPArg,
 
 	if eRule != nil {
 		if !reflect.DeepEqual(eRule.secIP, nSecIP) {
-			return RuleUnknownServiceErr, errors.New("secIP modify error")
+			return RuleUnknownServiceErr, errors.New("SecIP modify error")
 		}
 		// If a NAT rule already exists, we try not reschuffle the order of the end-points.
 		// We will try to append the new end-points at the end, while marking any other end-points
@@ -2035,7 +2037,7 @@ func (r *ruleEnt) Nat2DP(work DpWorkT) int {
 	mode := cmn.LBModeDefault
 
 	for _, sip := range r.secIP {
-		nWork.secIP = append(nWork.secIP, sip.sIP)
+		nWork.SecIP = append(nWork.SecIP, sip.sIP)
 	}
 
 	switch at := r.act.action.(type) {
@@ -2108,7 +2110,7 @@ func (r *ruleEnt) Nat2DP(work DpWorkT) int {
 				if e.inActive || e.noService {
 					ep.InActive = true
 				}
-				nWork.endPoints = append(nWork.endPoints, ep)
+				nWork.EndPoints = append(nWork.EndPoints, ep)
 			}
 		} else {
 			for _, k := range at.endPoints {
@@ -2121,7 +2123,7 @@ func (r *ruleEnt) Nat2DP(work DpWorkT) int {
 					ep.InActive = true
 				}
 
-				nWork.endPoints = append(nWork.endPoints, ep)
+				nWork.EndPoints = append(nWork.EndPoints, ep)
 			}
 		}
 		break
@@ -2130,8 +2132,8 @@ func (r *ruleEnt) Nat2DP(work DpWorkT) int {
 	}
 
 	if nWork.NatType == DpFullNat {
-		for idx := range nWork.endPoints {
-			ep := &nWork.endPoints[idx]
+		for idx := range nWork.EndPoints {
+			ep := &nWork.EndPoints[idx]
 			if mode == cmn.LBModeOneArm {
 				e, sip, _ := r.zone.L3.IfaSelectAny(ep.XIP, false)
 				if e != 0 {
@@ -2159,8 +2161,8 @@ func (r *ruleEnt) Nat2DP(work DpWorkT) int {
 			}
 		}
 	} else {
-		for idx := range nWork.endPoints {
-			ep := &nWork.endPoints[idx]
+		for idx := range nWork.EndPoints {
+			ep := &nWork.EndPoints[idx]
 			if tk.IsNetIPv6(nWork.ServiceIP.String()) && tk.IsNetIPv4(ep.XIP.String()) {
 				e, sip, _ := r.zone.L3.IfaSelectAny(ep.XIP, false)
 				if e != 0 {

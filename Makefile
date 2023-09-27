@@ -60,3 +60,45 @@ docker-arm64:
 
 lint:
 	golangci-lint run --enable-all
+
+stop:
+	@rm -rf /opt/loxilb/dp/bpf/bd_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/cpu_map
+	@rm -rf /opt/loxilb/dp/bpf/crc32c_map
+	@rm -rf /opt/loxilb/dp/bpf/ct_ctr
+	@rm -rf /opt/loxilb/dp/bpf/ct_map
+	@rm -rf /opt/loxilb/dp/bpf/ct_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/dmac_map
+	@rm -rf /opt/loxilb/dp/bpf/fc_v4_map
+	@rm -rf /opt/loxilb/dp/bpf/fc_v4_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/fcas
+	@rm -rf /opt/loxilb/dp/bpf/fw_v4_map
+	@rm -rf /opt/loxilb/dp/bpf/fw_v4_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/gparser
+	@rm -rf /opt/loxilb/dp/bpf/intf_map
+	@rm -rf /opt/loxilb/dp/bpf/intf_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/live_cpu_map
+	@rm -rf /opt/loxilb/dp/bpf/mirr_map
+	@rm -rf /opt/loxilb/dp/bpf/nat_map
+	@rm -rf /opt/loxilb/dp/bpf/nat_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/nh_map
+	@rm -rf /opt/loxilb/dp/bpf/pgm_tbl
+	@rm -rf /opt/loxilb/dp/bpf/pkt_ring
+	@rm -rf /opt/loxilb/dp/bpf/pkts
+	@rm -rf /opt/loxilb/dp/bpf/polx_map
+	@rm -rf /opt/loxilb/dp/bpf/rt_v4_map
+	@rm -rf /opt/loxilb/dp/bpf/rt_v4_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/rt_v6_map
+	@rm -rf /opt/loxilb/dp/bpf/rt_v6_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/sess_v4_map
+	@rm -rf /opt/loxilb/dp/bpf/sess_v4_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/smac_map
+	@rm -rf /opt/loxilb/dp/bpf/tmac_map
+	@rm -rf /opt/loxilb/dp/bpf/tmac_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/tx_bd_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/tx_intf_map
+	@rm -rf /opt/loxilb/dp/bpf/tx_intf_stats_map
+	@rm -rf /opt/loxilb/dp/bpf/xctk
+	@rm -rf /opt/loxilb/dp/bpf/xfck
+	@rm -rf /opt/loxilb/dp/bpf/xfis
+	@ip link delete llb0 || true

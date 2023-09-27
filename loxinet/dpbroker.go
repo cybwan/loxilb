@@ -23,8 +23,9 @@ import (
 	"sync"
 	"time"
 
-	cmn "github.com/loxilb-io/loxilb/common"
 	tk "github.com/loxilb-io/loxilib"
+
+	cmn "github.com/loxilb-io/loxilb/common"
 )
 
 // man names constants
@@ -283,8 +284,8 @@ type NatDpWorkQ struct {
 	NatType   NatT
 	EpSel     NatSel
 	InActTo   uint64
-	endPoints []NatEP
-	secIP     []net.IP
+	EndPoints []NatEP
+	SecIP     []net.IP
 }
 
 // DpCtInfo - representation of a datapath conntrack information
@@ -742,36 +743,38 @@ func (dp *DpH) DpWorkOnPeerOp(pWq *PeerDpWorkQ) DpRetT {
 // DpWorkSingle - routine to work on a single dp work queue request
 func DpWorkSingle(dp *DpH, m interface{}) DpRetT {
 	var ret DpRetT
-	switch mq := m.(type) {
-	case *MirrDpWorkQ:
-		ret = dp.DpWorkOnMirr(mq)
-	case *PolDpWorkQ:
-		ret = dp.DpWorkOnPol(mq)
-	case *PortDpWorkQ:
-		ret = dp.DpWorkOnPort(mq)
-	case *L2AddrDpWorkQ:
-		ret = dp.DpWorkOnL2Addr(mq)
-	case *RouterMacDpWorkQ:
-		ret = dp.DpWorkOnRtMac(mq)
-	case *NextHopDpWorkQ:
-		ret = dp.DpWorkOnNextHop(mq)
-	case *RouteDpWorkQ:
-		ret = dp.DpWorkOnRoute(mq)
-	case *NatDpWorkQ:
-		ret = dp.DpWorkOnNatLb(mq)
-	case *UlClDpWorkQ:
-		ret = dp.DpWorkOnUlCl(mq)
-	case *StatDpWorkQ:
-		ret = dp.DpWorkOnStat(mq)
-	case *TableDpWorkQ:
-		ret, _ = dp.DpWorkOnTableOp(mq)
-	case *FwDpWorkQ:
-		ret = dp.DpWorkOnFw(mq)
-	case *PeerDpWorkQ:
-		ret = dp.DpWorkOnPeerOp(mq)
-	default:
-		tk.LogIt(tk.LogError, "unexpected type %T\n", mq)
-		ret = DpWqUnkErr
+	if dp, ret = DpWorkDemo(dp, m); dp != nil {
+		switch mq := m.(type) {
+		case *MirrDpWorkQ:
+			ret = dp.DpWorkOnMirr(mq)
+		case *PolDpWorkQ:
+			ret = dp.DpWorkOnPol(mq)
+		case *PortDpWorkQ:
+			ret = dp.DpWorkOnPort(mq)
+		case *L2AddrDpWorkQ:
+			ret = dp.DpWorkOnL2Addr(mq)
+		case *RouterMacDpWorkQ:
+			ret = dp.DpWorkOnRtMac(mq)
+		case *NextHopDpWorkQ:
+			ret = dp.DpWorkOnNextHop(mq)
+		case *RouteDpWorkQ:
+			ret = dp.DpWorkOnRoute(mq)
+		case *NatDpWorkQ:
+			ret = dp.DpWorkOnNatLb(mq)
+		case *UlClDpWorkQ:
+			ret = dp.DpWorkOnUlCl(mq)
+		case *StatDpWorkQ:
+			ret = dp.DpWorkOnStat(mq)
+		case *TableDpWorkQ:
+			ret, _ = dp.DpWorkOnTableOp(mq)
+		case *FwDpWorkQ:
+			ret = dp.DpWorkOnFw(mq)
+		case *PeerDpWorkQ:
+			ret = dp.DpWorkOnPeerOp(mq)
+		default:
+			tk.LogIt(tk.LogError, "unexpected type %T\n", mq)
+			ret = DpWqUnkErr
+		}
 	}
 	return ret
 }

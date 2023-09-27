@@ -52,9 +52,10 @@ import (
 	"time"
 	"unsafe"
 
-	cmn "github.com/loxilb-io/loxilb/common"
 	tk "github.com/loxilb-io/loxilib"
 	nlp "github.com/vishvananda/netlink"
+
+	cmn "github.com/loxilb-io/loxilb/common"
 )
 
 // This file implements the interface DpHookInterface
@@ -903,10 +904,10 @@ func DpNatLbRuleMod(w *NatDpWorkQ) int {
 		/*dat.npmhh = 2
 		dat.pmhh[0] = 0x64646464
 		dat.pmhh[1] = 0x65656565*/
-		for i, k := range w.secIP {
+		for i, k := range w.SecIP {
 			dat.pmhh[i] = C.uint(tk.IPtonl(k))
 		}
-		dat.npmhh = C.uchar(len(w.secIP))
+		dat.npmhh = C.uchar(len(w.SecIP))
 
 		switch {
 		case w.EpSel == EpRR:
@@ -926,7 +927,7 @@ func DpNatLbRuleMod(w *NatDpWorkQ) int {
 
 		nxfa := (*nxfrmAct)(unsafe.Pointer(&dat.nxfrms[0]))
 
-		for _, k := range w.endPoints {
+		for _, k := range w.EndPoints {
 			nxfa.wprio = C.uchar(k.Weight)
 			nxfa.nat_xport = C.ushort(tk.Htons(k.XPort))
 			if tk.IsNetIPv6(k.XIP.String()) {
@@ -951,12 +952,12 @@ func DpNatLbRuleMod(w *NatDpWorkQ) int {
 		}
 
 		// Any unused end-points should be marked inactive
-		for i := len(w.endPoints); i < C.LLB_MAX_NXFRMS; i++ {
+		for i := len(w.EndPoints); i < C.LLB_MAX_NXFRMS; i++ {
 			nxfa := (*nxfrmAct)(unsafe.Pointer(&dat.nxfrms[i]))
 			nxfa.inactive = 1
 		}
 
-		dat.nxfrm = C.ushort(len(w.endPoints))
+		dat.nxfrm = C.ushort(len(w.EndPoints))
 		if w.CsumDis {
 			dat.cdis = 1
 		} else {

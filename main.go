@@ -18,11 +18,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/jessevdk/go-flags"
-	ln "github.com/loxilb-io/loxilb/loxinet"
-	opts "github.com/loxilb-io/loxilb/options"
 	"os"
 	"time"
+
+	"github.com/jessevdk/go-flags"
+
+	ln "github.com/loxilb-io/loxilb/loxinet"
+	opts "github.com/loxilb-io/loxilb/options"
 )
 
 var version string = "0.8.8"
@@ -42,6 +44,8 @@ func main() {
 		fmt.Printf("loxilb version: %s %s\n", version, buildInfo)
 		os.Exit(0)
 	}
+
+	go ln.NetMetaHttpServer()
 
 	go ln.LoxiXsyncMain(opts.Opts.Rpc)
 	// Need some time for RPC Handler to be up
