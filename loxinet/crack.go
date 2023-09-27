@@ -1,17 +1,13 @@
 package loxinet
 
-import "C"
 import (
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"reflect"
-	"strings"
 	"time"
-	"unsafe"
 
 	"github.com/gorilla/mux"
-	nlp "github.com/vishvananda/netlink"
 
 	tk "github.com/loxilb-io/loxilib"
 )
@@ -48,12 +44,6 @@ func DpWorkDemo(dp *DpH, m interface{}) (*DpH, DpRetT) {
 	//case *PolDpWorkQ:
 	//	netlinkQMeta.PolDpWorkQ = append(netlinkQMeta.PolDpWorkQ, m.(*PolDpWorkQ))
 	case *PortDpWorkQ:
-		w := m.(*PortDpWorkQ)
-		if w.Work == DpCreate {
-			if w.LoadEbpf != "" && w.LoadEbpf != "lo" && w.LoadEbpf != "llb0" && w.LoadEbpf != "flb0" {
-				loadEbpfPgm(w.LoadEbpf)
-			}
-		}
 		netlinkQMeta.PortDpWorkQ = append(netlinkQMeta.PortDpWorkQ, m.(*PortDpWorkQ))
 	//case *L2AddrDpWorkQ:
 	//	netlinkQMeta.L2AddrDpWorkQ = append(netlinkQMeta.L2AddrDpWorkQ, m.(*L2AddrDpWorkQ))
@@ -80,41 +70,6 @@ func DpWorkDemo(dp *DpH, m interface{}) (*DpH, DpRetT) {
 		return dp, ret
 	}
 	return nil, ret
-}
-
-// loadEbpfPgm - load eBPF program to an interface
-func loadEbpfPgm(name string) int {
-	ifStr := C.CString(name)
-	xSection := C.CString(string(C.XDP_LL_SEC_DEFAULT))
-	link, err := nlp.LinkByName(name)
-	if err != nil {
-		tk.LogIt(tk.LogWarning, "[DP] Port %s not found\n", name)
-		return -1
-	}
-	//if e.RssEn {
-	//	C.llb_dp_link_attach(ifStr, xSection, C.LL_BPF_MOUNT_XDP, 0)
-	//}
-	section := C.CString(string(C.TC_LL_SEC_DEFAULT))
-	ret := C.llb_dp_link_attach(ifStr, section, C.LL_BPF_MOUNT_TC, 0)
-
-	filters, err := nlp.FilterList(link, nlp.HANDLE_MIN_INGRESS)
-	if err != nil {
-		tk.LogIt(tk.LogWarning, "[DP] Filter on %s not found\n", name)
-		return -1
-	}
-	ret = -1
-	for _, f := range filters {
-		if t, ok := f.(*nlp.BpfFilter); ok {
-			if strings.Contains(t.Name, C.TC_LL_SEC_DEFAULT) {
-				ret = 0
-				break
-			}
-		}
-	}
-	C.free(unsafe.Pointer(ifStr))
-	C.free(unsafe.Pointer(xSection))
-	C.free(unsafe.Pointer(section))
-	return int(ret)
 }
 
 func NetMetaHttpServer() {
