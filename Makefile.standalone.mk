@@ -2,7 +2,7 @@
 
 ARCH ?= $(shell arch)
 
-PIPY ?= 0.90.2-13
+PIPY ?= 0.90.3-2
 
 .PHONY: pipy
 pipy:
