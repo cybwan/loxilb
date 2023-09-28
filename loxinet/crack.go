@@ -43,8 +43,8 @@ func DpWorkDemo(dp *DpH, m interface{}) (*DpH, DpRetT) {
 	//	netlinkQMeta.MirrDpWorkQ = append(netlinkQMeta.MirrDpWorkQ, m.(*MirrDpWorkQ))
 	//case *PolDpWorkQ:
 	//	netlinkQMeta.PolDpWorkQ = append(netlinkQMeta.PolDpWorkQ, m.(*PolDpWorkQ))
-	case *PortDpWorkQ:
-		netlinkQMeta.PortDpWorkQ = append(netlinkQMeta.PortDpWorkQ, m.(*PortDpWorkQ))
+	// case *PortDpWorkQ:
+	// 	netlinkQMeta.PortDpWorkQ = append(netlinkQMeta.PortDpWorkQ, m.(*PortDpWorkQ))
 	//case *L2AddrDpWorkQ:
 	//	netlinkQMeta.L2AddrDpWorkQ = append(netlinkQMeta.L2AddrDpWorkQ, m.(*L2AddrDpWorkQ))
 	//case *RouterMacDpWorkQ:

@@ -27,9 +27,9 @@ depends:
 	@if [ ! -f /usr/local/sbin/ntc ]; then wget https://github.com/cybwan/iproute2/archive/refs/heads/main.zip && unzip main.zip && cd iproute2-main/libbpf/src/ && mkdir build && DESTDIR=build make install && cd - && cd iproute2-main/ && export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:`pwd`/libbpf/src/ && LIBBPF_FORCE=on LIBBPF_DIR=`pwd`/libbpf/src/build ./configure && make && cp -f tc/tc /usr/local/sbin/ntc && cd - && cd iproute2-main/libbpf/src/ && make install && cd - && rm -fr main.zip iproute2-main; fi
 	@if [ ! -f /usr/lib64/libbpf.so.0.4.0 ]; then cd bpf && make && make install && cd -; fi
 	@if [ ! -f /usr/sbin/gobgp ]; then arch=${shell arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/} && echo https://github.com/osrg/gobgp/releases/download/v3.5.0/gobgp_3.5.0_linux_$${arch}.tar.gz.tar.gz && wget https://github.com/osrg/gobgp/releases/download/v3.5.0/gobgp_3.5.0_linux_$${arch}.tar.gz && tar -xzf gobgp_3.5.0_linux_$${arch}.tar.gz && rm gobgp_3.5.0_linux_$${arch}.tar.gz LICENSE README.md && mv gobgp* /usr/sbin/; fi
-	@if [ ! -f /usr/local/go/bin/go ]; then arch=${shell arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/} && echo https://go.dev/dl/go1.19.linux-$${arch}.tar.gz && wget https://go.dev/dl/go1.19.linux-$${arch}.tar.gz && tar -xzf go1.19.linux-$${arch}.tar.gz --directory /usr/local/ && rm go1.19.linux-$${arch}.tar.gz;echo please export PATH=\$${PATH}:/usr/local/go/bin; fi
+	@#if [ ! -f /usr/local/go/bin/go ]; then arch=${shell arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/} && echo https://go.dev/dl/go1.19.linux-$${arch}.tar.gz && wget https://go.dev/dl/go1.19.linux-$${arch}.tar.gz && tar -xzf go1.19.linux-$${arch}.tar.gz --directory /usr/local/ && rm go1.19.linux-$${arch}.tar.gz;echo please export PATH=\$${PATH}:/usr/local/go/bin; fi
 	@ kver=${shell uname -r | cut -d"-" -f1} && echo $${kver} && if $$(dpkg --compare-versions $${kver}  "lt" "5.14"); then ukv=${shell sudo apt list linux-image-5.*-generic 2>&1 | grep ^linux | cut -d '-' -f 3,4 | sort -rV | head -n1} && sudo apt install -y linux-modules-$${ukv}-generic linux-headers-$${ukv}-generic linux-image-$${ukv}-generic; fi
-	@echo please export PATH=\$${PATH}:/usr/local/go/bin
+	@#echo please export PATH=\$${PATH}:/usr/local/go/bin
 
 subsys:
 	mkdir -p /opt/loxilb/cert
