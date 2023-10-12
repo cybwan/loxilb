@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"syscall"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 // Internal tc_stats representation in Go struct.

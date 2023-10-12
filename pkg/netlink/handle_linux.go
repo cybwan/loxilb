@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"github.com/vishvananda/netns"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 // Empty handle used by the netlink package methods

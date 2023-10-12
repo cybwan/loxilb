@@ -6,7 +6,7 @@ package netlink
 import (
 	"testing"
 
-	"netlink/nl"
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 )
 
 func TestXfrmMonitorExpire(t *testing.T) {

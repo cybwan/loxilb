@@ -3,8 +3,8 @@ package netlink
 import (
 	"fmt"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 // BridgeVlanList gets a map of device id to bridge vlan infos.

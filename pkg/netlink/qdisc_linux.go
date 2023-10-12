@@ -7,8 +7,8 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 // NOTE function is here because it uses other linux functions

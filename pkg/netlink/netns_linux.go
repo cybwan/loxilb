@@ -15,8 +15,8 @@ package netlink
 import (
 	"fmt"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 // These can be replaced by the values from sys/unix when it is next released.

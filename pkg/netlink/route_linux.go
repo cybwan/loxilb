@@ -9,9 +9,9 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"github.com/vishvananda/netns"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 // RtAttr is shared so it is in netlink_linux.go

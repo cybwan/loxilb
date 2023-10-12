@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 const FibRuleInvert = 0x2

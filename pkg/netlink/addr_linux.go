@@ -8,7 +8,8 @@ import (
 
 	"github.com/vishvananda/netns"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
+
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 )
 
 // AddrAdd will add an IP address to a link device.

@@ -15,9 +15,9 @@ import (
 	"time"
 	"unsafe"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"github.com/vishvananda/netns"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 func TestHandleCreateDelete(t *testing.T) {

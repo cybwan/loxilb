@@ -2,9 +2,9 @@ package netlink
 
 import (
 	"bytes"
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"io/ioutil"
 	"net"
-	"netlink/nl"
 	"testing"
 )
 

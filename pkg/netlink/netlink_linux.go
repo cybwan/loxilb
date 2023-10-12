@@ -1,6 +1,6 @@
 package netlink
 
-import "netlink/nl"
+import "github.com/cybwan/loxilb/pkg/netlink/nl"
 
 // Family type definitions
 const (

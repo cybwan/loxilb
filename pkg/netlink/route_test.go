@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"github.com/vishvananda/netns"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 func TestRouteAddDel(t *testing.T) {

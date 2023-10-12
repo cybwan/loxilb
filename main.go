@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/loxilb-io/loxilb/pkg/cmn"
-	"github.com/loxilb-io/loxilb/pkg/nlp"
+	"github.com/cybwan/loxilb/pkg/cmn"
+	"github.com/cybwan/loxilb/pkg/nlp"
 )
 
 type NetHook struct {

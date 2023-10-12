@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 // ConntrackTableType Conntrack table for the netlink operation

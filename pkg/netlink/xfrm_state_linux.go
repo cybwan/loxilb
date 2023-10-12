@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"unsafe"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 func writeStateAlgo(a *XfrmStateAlgo) []byte {

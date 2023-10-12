@@ -5,8 +5,8 @@ import (
 	"net"
 	"syscall"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 // IPSetEntry is used for adding, updating, retreiving and deleting entries

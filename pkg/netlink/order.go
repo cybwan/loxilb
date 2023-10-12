@@ -3,7 +3,7 @@ package netlink
 import (
 	"encoding/binary"
 
-	"netlink/nl"
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 )
 
 var (

@@ -17,8 +17,8 @@ import (
 	tk "github.com/loxilb-io/loxilib"
 	"golang.org/x/sys/unix"
 
-	"github.com/loxilb-io/loxilb/pkg/cmn"
-	"github.com/loxilb-io/loxilb/pkg/netlink"
+	"github.com/cybwan/loxilb/pkg/cmn"
+	"github.com/cybwan/loxilb/pkg/netlink"
 )
 
 const (

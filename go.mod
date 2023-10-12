@@ -1,9 +1,8 @@
-module github.com/loxilb-io/loxilb
+module github.com/cybwan/loxilb
 
 go 1.18
 
 require (
-	github.com/loxilb-io/loxilib v0.8.8
 	golang.org/x/sys v0.8.0
 )
 

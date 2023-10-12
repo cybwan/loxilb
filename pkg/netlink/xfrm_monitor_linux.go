@@ -3,9 +3,9 @@ package netlink
 import (
 	"fmt"
 
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"github.com/vishvananda/netns"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 type XfrmMsg interface {

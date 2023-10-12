@@ -4,8 +4,8 @@ import (
 	"syscall"
 
 	"fmt"
+	"github.com/cybwan/loxilb/pkg/netlink/nl"
 	"golang.org/x/sys/unix"
-	"netlink/nl"
 )
 
 // DevlinkDevEswitchAttr represents device's eswitch attributes
