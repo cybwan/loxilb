@@ -102,8 +102,9 @@ func (n NetHook) NetNeighGet() ([]cmn.NeighMod, error) {
 }
 
 func (n NetHook) NetNeighAdd(mod *cmn.NeighMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetNeighAdd: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetNeighDel(mod *cmn.NeighMod) (int, error) {
