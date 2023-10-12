@@ -34,8 +34,9 @@ func (n NetHook) NetPortGet() ([]cmn.PortDump, error) {
 }
 
 func (n NetHook) NetPortAdd(mod *cmn.PortMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("NetPortAdd: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetPortDel(mod *cmn.PortMod) (int, error) {
