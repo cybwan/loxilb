@@ -2,13 +2,9 @@ module github.com/cybwan/loxilb
 
 go 1.18
 
-require (
-	golang.org/x/sys v0.8.0
-)
+require golang.org/x/sys v0.8.0
 
 require (
-	github.com/loxilb-io/sctp v0.0.0-20230519081703-6d1baec82fd4 // indirect
-	golang.org/x/net v0.10.0 // indirect
+	github.com/loxilb-io/loxilib v0.9.4
+	github.com/vishvananda/netns v0.0.0-20200728191858-db3c7e526aae
 )
-
-require github.com/vishvananda/netns v0.0.0-20200728191858-db3c7e526aae
