@@ -254,7 +254,7 @@ func main() {
 	tk.LogItInit("/tmp/netlink.log", tk.LogDebug, true)
 	hook := new(NetHook)
 	nlp.NlpRegister(hook)
-	nlp.NlpInit(false, "")
+	nlp.NlpInit()
 	wait := make(chan int)
 	<-wait
 }

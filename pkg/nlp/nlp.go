@@ -68,9 +68,7 @@ type NlH struct {
 	LinkUpdateCh
 	NeighUpdateCh
 	RouteUpdateCh
-	IMap      map[string]Intf
-	BlackList string
-	BLRgx     *regexp.Regexp
+	IMap map[string]Intf
 }
 
 var hooks cmn.NetHookInterface
@@ -1180,12 +1178,6 @@ func DelRoute(route netlink.Route) int {
 
 func LUWorkSingle(m netlink.LinkUpdate) int {
 	var ret int
-
-	filter := nNl.BLRgx.MatchString(m.Link.Attrs().Name)
-	if filter {
-		return -1
-	}
-
 	ret = ModLink(m.Link, m.Header.Type == syscall.RTM_NEWLINK)
 	return ret
 }
@@ -1195,11 +1187,6 @@ func AUWorkSingle(m netlink.AddrUpdate) int {
 	link, err := netlink.LinkByIndex(m.LinkIndex)
 	if err != nil {
 		fmt.Println(err)
-		return -1
-	}
-
-	filter := nNl.BLRgx.MatchString(link.Attrs().Name)
-	if filter {
 		return -1
 	}
 
@@ -1236,11 +1223,6 @@ func NUWorkSingle(m netlink.NeighUpdate) int {
 		return -1
 	}
 
-	filter := nNl.BLRgx.MatchString(link.Attrs().Name)
-	if filter {
-		return -1
-	}
-
 	add := m.Type == syscall.RTM_NEWNEIGH
 
 	if add {
@@ -1254,17 +1236,6 @@ func NUWorkSingle(m netlink.NeighUpdate) int {
 
 func RUWorkSingle(m netlink.RouteUpdate) int {
 	var ret int
-
-	link, err := netlink.LinkByIndex(m.LinkIndex)
-	if err != nil {
-		fmt.Println(err)
-		return -1
-	}
-
-	filter := nNl.BLRgx.MatchString(link.Attrs().Name)
-	if filter {
-		return -1
-	}
 
 	if m.Type == syscall.RTM_NEWROUTE {
 		ret = AddRoute(m.Route)
@@ -1324,20 +1295,13 @@ func RUWorker(ch chan netlink.RouteUpdate, f chan struct{}) {
 	}
 }
 
-func NLWorker(nNl *NlH, bgpPeerMode bool) {
-	if bgpPeerMode {
-		for { /* Single thread for reading route NL msgs in below order */
-			RUWorker(nNl.FromRUCh, nNl.FromRUDone)
-			time.Sleep(1000 * time.Millisecond)
-		}
-	} else {
-		for { /* Single thread for reading all NL msgs in below order */
-			LUWorker(nNl.FromLUCh, nNl.FromLUDone)
-			AUWorker(nNl.FromAUCh, nNl.FromAUDone)
-			NUWorker(nNl.FromNUCh, nNl.FromNUDone)
-			RUWorker(nNl.FromRUCh, nNl.FromRUDone)
-			time.Sleep(1000 * time.Millisecond)
-		}
+func NLWorker(nNl *NlH) {
+	for { /* Single thread for reading all NL msgs in below order */
+		LUWorker(nNl.FromLUCh, nNl.FromLUDone)
+		AUWorker(nNl.FromAUCh, nNl.FromAUDone)
+		NUWorker(nNl.FromNUCh, nNl.FromNUDone)
+		RUWorker(nNl.FromRUCh, nNl.FromRUDone)
+		time.Sleep(1000 * time.Millisecond)
 	}
 }
 
@@ -1347,10 +1311,6 @@ func GetBridges() {
 		return
 	}
 	for _, link := range links {
-		filter := nNl.BLRgx.MatchString(link.Attrs().Name)
-		if filter {
-			continue
-		}
 		switch link.(type) {
 		case *netlink.Bridge:
 			{
@@ -1373,12 +1333,6 @@ func NlpGet(ch chan bool) int {
 	}
 
 	for _, link := range links {
-
-		filter := nNl.BLRgx.MatchString(link.Attrs().Name)
-		if filter {
-			continue
-		}
-
 		ret = ModLink(link, true)
 		if ret == -1 {
 			continue
@@ -1506,25 +1460,9 @@ func LbSessionGet(done bool) int {
 	return 0
 }
 
-func NlpInit(bgpPeerMode bool, blackList string) *NlH {
+func NlpInit() *NlH {
 
 	nNl = new(NlH)
-
-	nNl.BlackList = blackList
-	nNl.BLRgx = regexp.MustCompile(blackList)
-
-	if bgpPeerMode {
-		nNl.FromRUCh = make(chan netlink.RouteUpdate, cmn.RuWorkQLen)
-		err := netlink.RouteSubscribe(nNl.FromRUCh, nNl.FromRUDone)
-		if err != nil {
-			fmt.Println(err)
-		} else {
-			tk.LogIt(tk.LogInfo, "[NLP] Route msgs subscribed\n")
-		}
-
-		go NLWorker(nNl, bgpPeerMode)
-		return nNl
-	}
 
 	nNl.FromAUCh = make(chan netlink.AddrUpdate, cmn.AuWorkqLen)
 	nNl.FromLUCh = make(chan netlink.LinkUpdate, cmn.LuWorkQLen)
@@ -1565,7 +1503,7 @@ func NlpInit(bgpPeerMode bool, blackList string) *NlH {
 		tk.LogIt(tk.LogInfo, "[NLP] Route msgs subscribed\n")
 	}
 
-	go NLWorker(nNl, bgpPeerMode)
+	go NLWorker(nNl)
 	tk.LogIt(tk.LogInfo, "[NLP] NLP Subscription done\n")
 
 	go LbSessionGet(done)
