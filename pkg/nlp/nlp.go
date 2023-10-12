@@ -1107,7 +1107,7 @@ func AddRoute(route netlink.Route) int {
 			tk.LogIt(tk.LogError, "[NLP] RT  %s via %s added\n", ipNet.String(),
 				route.Gw.String())
 		} else {
-			tk.LogIt(tk.LogInfo, "[NLP] RT  %s added\n", ipNet.String())
+			tk.LogIt(tk.LogDebug, "[NLP] RT  %s added\n", ipNet.String())
 		}
 	}
 
