@@ -61,8 +61,9 @@ func (n NetHook) NetVlanDel(mod *cmn.VlanMod) (int, error) {
 }
 
 func (n NetHook) NetVlanPortAdd(mod *cmn.VlanPortMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetVlanPortAdd: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetVlanPortDel(mod *cmn.VlanPortMod) (int, error) {
