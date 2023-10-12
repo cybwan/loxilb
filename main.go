@@ -252,4 +252,6 @@ func main() {
 	hook := new(NetHook)
 	nlp.NlpRegister(hook)
 	nlp.NlpInit(false, "")
+	wait := make(chan int)
+	<-wait
 }
