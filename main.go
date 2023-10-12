@@ -1,6 +1,8 @@
 package main
 
 import (
+	tk "github.com/loxilb-io/loxilib"
+
 	"github.com/cybwan/loxilb/pkg/cmn"
 	"github.com/cybwan/loxilb/pkg/nlp"
 )
@@ -249,6 +251,7 @@ func (n NetHook) NetGoBGPGCAdd(gc *cmn.GoBGPGlobalConfig) (int, error) {
 }
 
 func main() {
+	tk.CurrLogLevel = tk.LogDebug
 	hook := new(NetHook)
 	nlp.NlpRegister(hook)
 	nlp.NlpInit(false, "")
