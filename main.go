@@ -251,7 +251,7 @@ func (n NetHook) NetGoBGPGCAdd(gc *cmn.GoBGPGlobalConfig) (int, error) {
 }
 
 func main() {
-	tk.CurrLogLevel = tk.LogDebug
+	tk.LogItInit("/tmp/netlink.log", tk.LogDebug, true)
 	hook := new(NetHook)
 	nlp.NlpRegister(hook)
 	nlp.NlpInit(false, "")
