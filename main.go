@@ -1,6 +1,9 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+
 	tk "github.com/loxilb-io/loxilib"
 
 	"github.com/cybwan/loxilb/pkg/cmn"
@@ -46,8 +49,9 @@ func (n NetHook) NetVlanGet() ([]cmn.VlanGet, error) {
 }
 
 func (n NetHook) NetVlanAdd(mod *cmn.VlanMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("NetVlanAdd: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetVlanDel(mod *cmn.VlanMod) (int, error) {
