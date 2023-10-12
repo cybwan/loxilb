@@ -261,7 +261,7 @@ func (n NetHook) NetGoBGPGCAdd(gc *cmn.GoBGPGlobalConfig) (int, error) {
 }
 
 func main() {
-	tk.LogItInit("/tmp/netlink.log", tk.LogDebug, true)
+	tk.LogItInit("/tmp/netlink.log", tk.LogError, true)
 	hook := new(NetHook)
 	nlp.NlpRegister(hook)
 	nlp.NlpInit()
