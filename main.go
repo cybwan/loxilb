@@ -1,51 +1,255 @@
-/*
- * Copyright (c) 2022 NetLOX Inc
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at:
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package main
 
 import (
-	"fmt"
-	"github.com/jessevdk/go-flags"
-	ln "github.com/loxilb-io/loxilb/loxinet"
-	opts "github.com/loxilb-io/loxilb/options"
-	"os"
-	"time"
+	"github.com/loxilb-io/loxilb/pkg/cmn"
+	"github.com/loxilb-io/loxilb/pkg/nlp"
 )
 
-var version string = "0.8.8"
-var buildInfo string = ""
+type NetHook struct {
+}
+
+func (n NetHook) NetMirrorGet() ([]cmn.MirrGetMod, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetMirrorAdd(mod *cmn.MirrMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetMirrorDel(mod *cmn.MirrMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetPortGet() ([]cmn.PortDump, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetPortAdd(mod *cmn.PortMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetPortDel(mod *cmn.PortMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetVlanGet() ([]cmn.VlanGet, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetVlanAdd(mod *cmn.VlanMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetVlanDel(mod *cmn.VlanMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetVlanPortAdd(mod *cmn.VlanPortMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetVlanPortDel(mod *cmn.VlanPortMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetFdbAdd(mod *cmn.FdbMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetFdbDel(mod *cmn.FdbMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetAddrGet() ([]cmn.IPAddrGet, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetAddrAdd(mod *cmn.IPAddrMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetAddrDel(mod *cmn.IPAddrMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetNeighGet() ([]cmn.NeighMod, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetNeighAdd(mod *cmn.NeighMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetNeighDel(mod *cmn.NeighMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetRouteGet() ([]cmn.RouteGet, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetRouteAdd(mod *cmn.RouteMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetRouteDel(mod *cmn.RouteMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetLbRuleAdd(mod *cmn.LbRuleMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetLbRuleDel(mod *cmn.LbRuleMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetLbRuleGet() ([]cmn.LbRuleMod, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetCtInfoGet() ([]cmn.CtInfo, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetSessionGet() ([]cmn.SessionMod, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetSessionUlClGet() ([]cmn.SessionUlClMod, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetSessionAdd(mod *cmn.SessionMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetSessionDel(mod *cmn.SessionMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetSessionUlClAdd(mod *cmn.SessionUlClMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetSessionUlClDel(mod *cmn.SessionUlClMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetPolicerGet() ([]cmn.PolMod, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetPolicerAdd(mod *cmn.PolMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetPolicerDel(mod *cmn.PolMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetCIStateMod(mod *cmn.HASMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetCIStateGet() ([]cmn.HASMod, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetFwRuleAdd(mod *cmn.FwRuleMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetFwRuleDel(mod *cmn.FwRuleMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetFwRuleGet() ([]cmn.FwRuleMod, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetEpHostAdd(fm *cmn.EndPointMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetEpHostDel(fm *cmn.EndPointMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetEpHostGet() ([]cmn.EndPointMod, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetParamSet(param cmn.ParamMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetParamGet(param *cmn.ParamMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetGoBGPNeighAdd(nm *cmn.GoBGPNeighMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetGoBGPNeighDel(nm *cmn.GoBGPNeighMod) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (n NetHook) NetGoBGPGCAdd(gc *cmn.GoBGPGlobalConfig) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
 
 func main() {
-	fmt.Printf("loxilb start\n")
-
-	// Parse command-line arguments
-	_, err := flags.Parse(&opts.Opts)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	if opts.Opts.Version {
-		fmt.Printf("loxilb version: %s %s\n", version, buildInfo)
-		os.Exit(0)
-	}
-
-	go ln.LoxiXsyncMain(opts.Opts.Rpc)
-	// Need some time for RPC Handler to be up
-	time.Sleep(2 * time.Second)
-
-	ln.Main()
+	hook := new(NetHook)
+	nlp.NlpRegister(hook)
+	nlp.NlpInit(false, "")
 }
