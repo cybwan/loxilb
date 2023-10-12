@@ -86,8 +86,9 @@ func (n NetHook) NetAddrGet() ([]cmn.IPAddrGet, error) {
 }
 
 func (n NetHook) NetAddrAdd(mod *cmn.IPAddrMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetAddrAdd: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetAddrDel(mod *cmn.IPAddrMod) (int, error) {
