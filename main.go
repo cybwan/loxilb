@@ -118,8 +118,9 @@ func (n NetHook) NetRouteGet() ([]cmn.RouteGet, error) {
 }
 
 func (n NetHook) NetRouteAdd(mod *cmn.RouteMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetRouteAdd: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetRouteDel(mod *cmn.RouteMod) (int, error) {
