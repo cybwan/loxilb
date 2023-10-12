@@ -35,7 +35,7 @@ func (n NetHook) NetPortGet() ([]cmn.PortDump, error) {
 
 func (n NetHook) NetPortAdd(mod *cmn.PortMod) (int, error) {
 	bytes, _ := json.Marshal(mod)
-	fmt.Println("NetPortAdd: ", string(bytes))
+	fmt.Println("######## NetPortAdd: ", string(bytes))
 	return 0, nil
 }
 
@@ -51,7 +51,7 @@ func (n NetHook) NetVlanGet() ([]cmn.VlanGet, error) {
 
 func (n NetHook) NetVlanAdd(mod *cmn.VlanMod) (int, error) {
 	bytes, _ := json.Marshal(mod)
-	fmt.Println("NetVlanAdd: ", string(bytes))
+	fmt.Println("######## NetVlanAdd: ", string(bytes))
 	return 0, nil
 }
 
