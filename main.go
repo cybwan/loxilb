@@ -40,8 +40,9 @@ func (n NetHook) NetPortAdd(mod *cmn.PortMod) (int, error) {
 }
 
 func (n NetHook) NetPortDel(mod *cmn.PortMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetPortDel: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetVlanGet() ([]cmn.VlanGet, error) {
@@ -56,8 +57,9 @@ func (n NetHook) NetVlanAdd(mod *cmn.VlanMod) (int, error) {
 }
 
 func (n NetHook) NetVlanDel(mod *cmn.VlanMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetVlanDel: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetVlanPortAdd(mod *cmn.VlanPortMod) (int, error) {
@@ -67,8 +69,9 @@ func (n NetHook) NetVlanPortAdd(mod *cmn.VlanPortMod) (int, error) {
 }
 
 func (n NetHook) NetVlanPortDel(mod *cmn.VlanPortMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetVlanPortDel: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetFdbAdd(mod *cmn.FdbMod) (int, error) {
@@ -78,8 +81,9 @@ func (n NetHook) NetFdbAdd(mod *cmn.FdbMod) (int, error) {
 }
 
 func (n NetHook) NetFdbDel(mod *cmn.FdbMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetFdbDel: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetAddrGet() ([]cmn.IPAddrGet, error) {
@@ -94,8 +98,9 @@ func (n NetHook) NetAddrAdd(mod *cmn.IPAddrMod) (int, error) {
 }
 
 func (n NetHook) NetAddrDel(mod *cmn.IPAddrMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetAddrDel: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetNeighGet() ([]cmn.NeighMod, error) {
@@ -110,8 +115,9 @@ func (n NetHook) NetNeighAdd(mod *cmn.NeighMod) (int, error) {
 }
 
 func (n NetHook) NetNeighDel(mod *cmn.NeighMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetNeighDel: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetRouteGet() ([]cmn.RouteGet, error) {
@@ -126,8 +132,9 @@ func (n NetHook) NetRouteAdd(mod *cmn.RouteMod) (int, error) {
 }
 
 func (n NetHook) NetRouteDel(mod *cmn.RouteMod) (int, error) {
-	//TODO implement me
-	panic("implement me")
+	bytes, _ := json.Marshal(mod)
+	fmt.Println("######## NetRouteDel: ", string(bytes))
+	return 0, nil
 }
 
 func (n NetHook) NetLbRuleAdd(mod *cmn.LbRuleMod) (int, error) {
